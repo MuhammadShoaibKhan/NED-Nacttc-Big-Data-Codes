@@ -1,0 +1,159 @@
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| ncbc               |
+| performance_schema |
+| sakila             |
+| sys                |
+| work               |
+| world              |
++--------------------+
+8 rows in set (0.80 sec)
+
+mysql>
+mysql> create database hpcc;
+Query OK, 1 row affected (0.38 sec)
+
+mysql> use hpcc;
+Database changed
+mysql> use ncbc;
+Database changed
+mysql> show tables;
+Empty set (0.32 sec)
+
+mysql> create table teacher(t_id int (11),tName varchar(30));
+Query OK, 0 rows affected, 1 warning (1.80 sec)
+
+mysql>
+mysql> desc teacher;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| t_id  | int         | YES  |     | NULL    |       |
+| tName | varchar(30) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.09 sec)
+
+mysql> rename teacher to teachers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'teacher to teachers' at line 1
+mysql> RENAME teacher TO teachers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'teacher TO teachers' at line 1
+mysql> RENAME TABLE teacher TO teachers;
+Query OK, 0 rows affected (0.50 sec)
+
+mysql> INSERT INTO teacher (tid,tName) values(1,'Ali')
+    ->
+    -> ;
+ERROR 1146 (42S02): Table 'ncbc.teacher' doesn't exist
+mysql> INSERT INTO teachers (tid,tName) values(1,'Ali')
+    -> ;
+ERROR 1054 (42S22): Unknown column 'tid' in 'field list'
+mysql> INSERT INTO teachers (t_id,tName) values(1,'Ali');
+Query OK, 1 row affected (0.19 sec)
+
+mysql> ALTER TABLE teachers ADD noof Course int(2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Course int(2)' at line 1
+mysql> ALTER TABLE teachers ADD noofCourse int(2);
+Query OK, 0 rows affected, 1 warning (0.84 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> INSERT INTO teachers (noofCourse) values(3);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from teachers;
++------+-------+------------+
+| t_id | tName | noofCourse |
++------+-------+------------+
+|    1 | Ali   |       NULL |
+| NULL | NULL  |          3 |
++------+-------+------------+
+2 rows in set (0.02 sec)
+
+mysql> INSERT INTO teachers (t_id,tName,noofCorse) values(1,'Ali',4);
+ERROR 1054 (42S22): Unknown column 'noofCorse' in 'field list'
+mysql> INSERT INTO teachers (t_id,tName,noofCourse) values(1,'Ali',4);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> alter table teachers change noofCourse COURSES int(6);
+Query OK, 0 rows affected, 1 warning (0.46 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql>
+mysql> select * from teachers;
++------+-------+---------+
+| t_id | tName | COURSES |
++------+-------+---------+
+|    1 | Ali   |    NULL |
+| NULL | NULL  |       3 |
+|    1 | Ali   |       4 |
++------+-------+---------+
+3 rows in set (0.03 sec)
+
+mysql> alter table teachers  MODIFY COURSES varchar(9);
+Query OK, 3 rows affected (1.82 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from teachers;
++------+-------+---------+
+| t_id | tName | COURSES |
++------+-------+---------+
+|    1 | Ali   | NULL    |
+| NULL | NULL  | 3       |
+|    1 | Ali   | 4       |
++------+-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> alter table teachers drop COURSES;
+Query OK, 0 rows affected (1.63 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from teachers;
++------+-------+
+| t_id | tName |
++------+-------+
+|    1 | Ali   |
+| NULL | NULL  |
+|    1 | Ali   |
++------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from teachers;
++------+-------+
+| t_id | tName |
++------+-------+
+|    1 | Ali   |
+| NULL | NULL  |
+|    1 | Ali   |
++------+-------+
+3 rows in set (0.00 sec)
+
+mysql> TRUNCATE table teachers;
+Query OK, 0 rows affected (0.69 sec)
+
+mysql> select * from teachers;
+Empty set (0.07 sec)
+
+mysql> DROP table teachers;
+Query OK, 0 rows affected (0.57 sec)
+
+mysql> select * from teachers;
+ERROR 1146 (42S02): Table 'ncbc.teachers' doesn't exist
+mysql> show database;

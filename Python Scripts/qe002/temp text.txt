@@ -1,0 +1,5 @@
+#q101[2] = list(q102)
+
+
+#q102.append(q101.pop(2))
+#q102.append(q101.pop(-2))

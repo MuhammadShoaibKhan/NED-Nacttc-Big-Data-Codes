@@ -1,0 +1,20 @@
+ages = [15,20,25,30,35,40]
+Q1: Write a Python program that multiplies all the items in a list.
+
+
+Q3: Write a Python program to count the number of strings where
+1- the string length is 2 or more
+2- the first and last character are same.
+Sample List : ['abc', 'xyz', 'aba', '1221'] Expected Result : 2
+
+
+Q5: Write a Python program to print a specified list after removing
+    the 0th, 4th and 5th elements.
+Sample List : ['Red', 'Green', 'White', 'Black', 'Pink', 'Yellow']
+Expected Output : ['Green', 'White', 'Black']
+
+
+Q.7 Make a Calculator using Functions. 
+Make a function for add, subtract, multiply and divide. 
+All the functions should have two parameters. 
+All the functions should return the result.

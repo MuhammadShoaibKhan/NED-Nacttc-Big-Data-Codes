@@ -1,0 +1,15 @@
+
+Q2: Write a Python program to get the largest number from a list.
+
+
+Q4: Write a Python program to remove duplicates from a list.
+
+
+Q6:In the given list it is given that each name is followed by the 
+   person's age. Create a dictionary with a key value pairing that 
+   replaces this list.
+input: ["abdul", 15, 'mohsin' , 20, 'max', 25 , 'simon', 30, 'fawad' , 35]
+
+
+Q.8 Create a basic function that returns True if the word 'dog' is contained in the input string. 
+Don't worry about edge cases like a punctuation being attached to the word dog.

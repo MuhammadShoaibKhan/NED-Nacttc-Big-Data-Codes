@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <conio.h>
+//*task 3 conversion of temperature (A)*//
+int main()
+{
+	int num1,num2;
+	int prod=2;
+	
+	char ch1;
+		   printf("Enter Two Numbers:\t");
+	       scanf("%d%d",&num1,&num2);
+	       printf("enter option:\n 5 for addition\n 6 for substraction\n 7 for multiplication\n 8 for divide\t");
+	//ch1=getch();
+	scanf("	%c",&ch1);
+	switch(ch1)
+	{
+	case'5':
+			printf("sum is:%d",num1+num2);
+	break;
+	
+	case'6':
+			printf("diff is:%d",num1-num2);
+	break;		
+	
+	case'7':
+			printf("multiplication is:%d",num1*num2);
+	break;
+	
+	case'8':
+			printf("divide is:%d",num1/num2);
+	break;
+	
+	default:
+		    printf("wrong");
+	}
+}

@@ -1,0 +1,28 @@
+iris2 = sns.load_dataset("iris")
+iris2.head()
+
+iris2.shape
+
+iris3 = pd.DataFrame(iris2)
+iris2
+
+
+iris3 = df.drop(columns='species')
+iris3
+
+
+#######iris3.columns = ["sepal length (cm)", "sepal width (cm)", "petal length (cm)", "petal width (cm)"]
+
+iris3.rename(columns={'sepal_length':'sepal length (cm)','sepal_width':'sepal width (cm)','petal_length':'petal length (cm)', 'petal_width':'petal width (cm)'}, 
+                 inplace=True)
+
+
+from sklearn.datasets import load_iris
+iris = load_iris();
+data1 = pd.DataFrame(data= np.c_[iris['data']],
+                     columns= iris['feature_names'])
+
+
+data1
+
+iris3.equals(data1)

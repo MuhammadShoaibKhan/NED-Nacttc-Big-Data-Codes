@@ -1,0 +1,47 @@
+CREATE TABLE employee(id int(11) PRIMARY KEY AUTO_INCREMENT, name varchar(255), salary float(10), dob date, doj date);
+
+describe employee;
+
+INSERT INTO employee(id,name, salary, dob,doj) VALUES(1,'zahid',50000,'1990-12-02','2010-02-28');
+
+INSERT INTO employee(name, salary, dob,doj) VALUES('shahid',60000,'1995-10-12','2012-08-22'),
+    -> ('hamid',60000,'1999-11-12','2015-08-22'),
+    -> ('kamil',65000,'2001-10-11','2019-01-05'),
+    -> ('ghazanfar',25000,'1997-04-11','2017-02-06'),
+    -> ('zafar',55000,'1998-05-13','2014-02-02'),
+    -> ('iqbal',60000,'1998-04-10','2018-03-08'),
+    -> ('shehzad',70000,'1994-01-21','2015-06-18'),
+    -> ('jamal',90000,'1989-01-25','2011-08-12'),
+    -> ('rohail',95000,'1991-05-19','2019-02-10');
+
+SELECT * FROM employee;
+
+SELECT CURRENT_DATE;
+
+SELECT NOW();
+
+SELECT name,doj,timestampdiff(YEAR,doj,Curdate()) FROM employee;
+
+SELECT name,doj,timestampdiff(MONTH,doj,Curdate()) FROM employee;
+
+SELECT name,doj,timestampdiff(DAY,doj,Curdate()) FROM employee;
+
+SELECT name,doj,timestampdiff(WEEK,doj,Curdate()) FROM employee;
+
+SELECT name,dob,MONTH(dob) FROM employee;
+
+SELECT name,dob,DAY(dob) FROM employee;
+
+ INSERT INTO employees(id,name,dept_name,salary) VALUES(1,'zahid','socialsciences',60000),
+    -> (2,'shahid','actuarialsciences',75000),
+    -> (3,'hamid','appliedsciences',45000),
+    -> (4,'wahid','chemistry',90000);
+INSERT INTO depart(id_dep,dept_name,emp_id) VALUES(11,'actuarialsciences');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO depart(id_dep,dept_name,emp_id) VALUES(11,'actuarialsciences',2);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO depart(id_dep,dept_name,emp_id) VALUES(22,'appliedsciences',3),
+    -> (33,'chemistry',4),
+    -> (44,'socialsciences',1);
+Query OK, 3 rows affected (0.04 sec)

@@ -1,0 +1,404 @@
+mysql> \d;
+mysql> \d .
+mysql> show databases;
+    ->
+    -> ^C
+mysql> show databases;
+    -> ^C
+mysql> show databases;
+    -> ^C
+mysql> show databases.
++--------------------+
+| Database           |
++--------------------+
+| bushra             |
+| information_schema |
+| lol                |
+| mysql              |
+| ncbc               |
+| nimra              |
+| performance_schema |
+| school             |
+| sys                |
++--------------------+
+9 rows in set (0.34 sec)
+
+mysql> \d ;
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bushra             |
+| information_schema |
+| lol                |
+| mysql              |
+| ncbc               |
+| nimra              |
+| performance_schema |
+| school             |
+| sys                |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use school;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_school |
++------------------+
+| costomer         |
+| customers        |
+| labor            |
+| student          |
+| teacher          |
++------------------+
+5 rows in set (0.11 sec)
+
+mysql> select*from student;
++----+-------+
+| ID | Name  |
++----+-------+
+|  3 | Ahmed |
+|  2 | Ali   |
+|  1 | Kumar |
++----+-------+
+3 rows in set (0.02 sec)
+
+mysql> select * from customers;
+Empty set (0.19 sec)
+
+mysql> select * from teacher;
++------+---------------+-------+
+| T_id | T_mail        | T_dep |
++------+---------------+-------+
+|   33 | ABC@GMAIL.COM | CIVIL |
++------+---------------+-------+
+1 row in set (0.02 sec)
+
+mysql> use bushra;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_bushra |
++------------------+
+| depts            |
+| employees        |
+| teachers         |
++------------------+
+3 rows in set (0.02 sec)
+
+mysql> select * from teachers;
++------+--------+----------+------------+------------+
+| t_id | t_name | t_salary | t_DOB      | t_Hdate    |
++------+--------+----------+------------+------------+
+|    2 | kiran  |    45000 | 1994-03-12 | 2019-02-25 |
+|    1 | aimun  |    45000 | 1995-09-12 | 2019-12-25 |
+|    3 | maha   |    45000 | 1996-08-12 | 2019-06-14 |
+|    4 | warda  |     5000 | 1995-11-12 | 2019-04-14 |
+|    5 | anwer  |    15000 | 1997-01-12 | 2021-04-19 |
+|    6 | waqar  |    15000 | 1997-01-12 | 2016-03-16 |
+|    7 | ilyas  |    25000 | 1996-07-28 | 2018-09-17 |
+|    8 | bushra |    25000 | 1998-07-08 | 2021-09-27 |
+|    9 | sheeba |    25000 | 1997-05-08 | 2021-04-13 |
+|   10 | sadaf  |    25000 | 1997-06-16 | 2021-05-15 |
++------+--------+----------+------------+------------+
+10 rows in set (0.01 sec)
+
+mysql> d //
+    -> CREATE PROCEDURE GetAllTeachers()
+    -> BEGIN
+    -> SELECT * FROM teachers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'd //
+CREATE PROCEDURE GetAllTeachers()
+BEGIN
+SELECT * FROM teachers' at line 1
+mysql> d //
+    -> select * from teacher;^C
+mysql> DELIMETER //
+    -> CREATE PROCEDURE GetAllTeachers()
+    -> BEGIN
+    -> SELECT * FROM teachers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELIMETER //
+CREATE PROCEDURE GetAllTeachers()
+BEGIN
+SELECT * FROM teachers' at line 1
+mysql> /d //
+    -> d //
+    -> ^C
+mysql> \h
+
+For information about MySQL products and services, visit:
+   http://www.mysql.com/
+For developer information, including the MySQL Reference Manual, visit:
+   http://dev.mysql.com/
+To buy MySQL Enterprise support, training, or other products, visit:
+   https://shop.mysql.com/
+
+List of all MySQL commands:
+Note that all text commands must be first on line and end with ';'
+?         (\?) Synonym for `help'.
+clear     (\c) Clear the current input statement.
+connect   (\r) Reconnect to the server. Optional arguments are db and host.
+delimiter (\d) Set statement delimiter.
+ego       (\G) Send command to mysql server, display result vertically.
+exit      (\q) Exit mysql. Same as quit.
+go        (\g) Send command to mysql server.
+help      (\h) Display this help.
+notee     (\t) Don't write into outfile.
+print     (\p) Print current command.
+prompt    (\R) Change your mysql prompt.
+quit      (\q) Quit mysql.
+rehash    (\#) Rebuild completion hash.
+source    (\.) Execute an SQL script file. Takes a file name as an argument.
+status    (\s) Get status information from the server.
+system    (\!) Execute a system shell command.
+tee       (\T) Set outfile [to_outfile]. Append everything into given outfile.
+use       (\u) Use another database. Takes database name as argument.
+charset   (\C) Switch to another charset. Might be needed for processing binlog with multi-byte charsets.
+warnings  (\W) Show warnings after every statement.
+nowarning (\w) Don't show warnings after every statement.
+resetconnection(\x) Clean session context.
+
+For server side help, type 'help contents'
+
+mysql> \d.
+mysql> CREATE PROCEDURE GetAllTeachers()
+    -> BEGIN
+    -> select * from teachers;
+    -> END.
+Query OK, 0 rows affected (0.42 sec)
+
+mysql>
+mysql> CALL spGetAllTeachers();
+    -> ^C
+mysql> CALL spGetAllTeachers().
+ERROR 1305 (42000): PROCEDURE bushra.spGetAllTeachers does not exist
+mysql> CALL spGetAllTeachers.
+ERROR 1305 (42000): PROCEDURE bushra.spGetAllTeachers does not exist
+mysql> CALL GetAllTeachers.
++------+--------+----------+------------+------------+
+| t_id | t_name | t_salary | t_DOB      | t_Hdate    |
++------+--------+----------+------------+------------+
+|    2 | kiran  |    45000 | 1994-03-12 | 2019-02-25 |
+|    1 | aimun  |    45000 | 1995-09-12 | 2019-12-25 |
+|    3 | maha   |    45000 | 1996-08-12 | 2019-06-14 |
+|    4 | warda  |     5000 | 1995-11-12 | 2019-04-14 |
+|    5 | anwer  |    15000 | 1997-01-12 | 2021-04-19 |
+|    6 | waqar  |    15000 | 1997-01-12 | 2016-03-16 |
+|    7 | ilyas  |    25000 | 1996-07-28 | 2018-09-17 |
+|    8 | bushra |    25000 | 1998-07-08 | 2021-09-27 |
+|    9 | sheeba |    25000 | 1997-05-08 | 2021-04-13 |
+|   10 | sadaf  |    25000 | 1997-06-16 | 2021-05-15 |
++------+--------+----------+------------+------------+
+10 rows in set (0.05 sec)
+
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CREATE PROCEDURE salary()
+    -> BEGIN
+    -> select * from teachers, COUNT(t_salary) FROM teachers WHERE t_salary IN (15000,25000);
+    -> END.
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'COUNT(t_salary) FROM teachers WHERE t_salary IN (15000,25000);
+END' at line 3
+mysql> CREATE PROCEDURE salary()
+    -> BEGIN
+    -> SELECT * FROM teachers WHERE t_Salary= 45000;
+    -> END.
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CALL salary.
++------+--------+----------+------------+------------+
+| t_id | t_name | t_salary | t_DOB      | t_Hdate    |
++------+--------+----------+------------+------------+
+|    2 | kiran  |    45000 | 1994-03-12 | 2019-02-25 |
+|    1 | aimun  |    45000 | 1995-09-12 | 2019-12-25 |
+|    3 | maha   |    45000 | 1996-08-12 | 2019-06-14 |
++------+--------+----------+------------+------------+
+3 rows in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> BEGIN
+    -> END.
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'END' at line 2
+mysql> CREATE PROCEDURE sadafsalary()
+    -> BEGIN
+    -> SELECT * FROM teachers WHERE t_Salary IN ( 15000,25000);
+    -> END.
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> call sadafsalary.
++------+--------+----------+------------+------------+
+| t_id | t_name | t_salary | t_DOB      | t_Hdate    |
++------+--------+----------+------------+------------+
+|    5 | anwer  |    15000 | 1997-01-12 | 2021-04-19 |
+|    6 | waqar  |    15000 | 1997-01-12 | 2016-03-16 |
+|    7 | ilyas  |    25000 | 1996-07-28 | 2018-09-17 |
+|    8 | bushra |    25000 | 1998-07-08 | 2021-09-27 |
+|    9 | sheeba |    25000 | 1997-05-08 | 2021-04-13 |
+|   10 | sadaf  |    25000 | 1997-06-16 | 2021-05-15 |
++------+--------+----------+------------+------------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SET sadaf= 100;
+    -> ^C
+mysql> SET sadaf=100.
+ERROR 1193 (HY000): Unknown system variable 'sadaf'
+mysql> CREATE procedure teachers()
+    -> begin
+    -> declare x int (10) ;
+    -> set x=30000;
+    -> select*teachers where t_salary =30000;
+    -> end.
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'teachers where t_salary =30000;
+end' at line 5
+mysql> CREATE procedure teachersal()
+    -> begin
+    -> declare x int(10);
+    -> set x=25000;
+    -> select*teachers where t_salary=25000;
+    -> end.
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'teachers where t_salary=25000;
+end' at line 5
+mysql> CREATE procedure teachersal()
+    -> begin
+    -> declare x int
+    -> set x=25000;
+    -> select*teachers where t_salary=25000;
+    -> end.
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set x=25000;
+select*teachers where t_salary=25000;
+end' at line 4
+mysql> CREATE procedure teachersal()
+    -> begin
+    -> declare x int;
+    -> set x=25000;
+    -> select*teachers where t_salary=25000;
+    -> declare x int;
+    ->
+    ->
+    -> /
+    -> ^C
+mysql> CREATE procedure teachersal()
+    -> begin
+    -> declare x int;
+    -> set x=25000;
+    -> select*teachers where t_salary=x;
+    -> end.
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'teachers where t_salary=x;
+end' at line 5
+mysql> CREATE procedure teachersal()
+    -> begin
+    -> declare x int;
+    -> set x=25000;
+    -> select* from teachers where t_salary=x;
+    -> end.
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> call teachersal.
++------+--------+----------+------------+------------+
+| t_id | t_name | t_salary | t_DOB      | t_Hdate    |
++------+--------+----------+------------+------------+
+|    7 | ilyas  |    25000 | 1996-07-28 | 2018-09-17 |
+|    8 | bushra |    25000 | 1998-07-08 | 2021-09-27 |
+|    9 | sheeba |    25000 | 1997-05-08 | 2021-04-13 |
+|   10 | sadaf  |    25000 | 1997-06-16 | 2021-05-15 |
++------+--------+----------+------------+------------+
+4 rows in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create procedure tsal(IN t_salary int)
+    -> begin
+    -> select t_salary from teachers where t_salary=t_salary;
+    -> end.
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> call t_salary(25000)
+    -> .
+ERROR 1305 (42000): PROCEDURE bushra.t_salary does not exist
+mysql> call t_salary(25000).
+ERROR 1305 (42000): PROCEDURE bushra.t_salary does not exist
+mysql> create procedure tsal(IN t_sa int)
+    -> begin
+    -> select t_salary from teachers where t_salary=t_sa;
+    -> end.
+ERROR 1304 (42000): PROCEDURE tsal already exists
+mysql> create procedure ts(IN t_sa int)
+    -> begin
+    -> select t_salary from teachers where t_salary=t_sa;
+    -> end.
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> call ts.
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE bushra.ts; expected 1, got 0
+mysql> call ts(25000).
++----------+
+| t_salary |
++----------+
+|    25000 |
+|    25000 |
+|    25000 |
+|    25000 |
++----------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create procedure ts(IN t_sa int, IN t_id int(20))
+    -> begin
+    -> select t_salary from teachers where t_salary=t_sa.
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> create procedure soul(IN t_sa int, IN t_id int(20))
+    -> begin
+    -> select* from teachers where t_salary=t_sa AND t_id=t_id;
+    -> end.
+Query OK, 0 rows affected, 1 warning (0.07 sec)
+
+mysql> call soul(25000,7).
++------+--------+----------+------------+------------+
+| t_id | t_name | t_salary | t_DOB      | t_Hdate    |
++------+--------+----------+------------+------------+
+|    7 | ilyas  |    25000 | 1996-07-28 | 2018-09-17 |
+|    8 | bushra |    25000 | 1998-07-08 | 2021-09-27 |
+|    9 | sheeba |    25000 | 1997-05-08 | 2021-04-13 |
+|   10 | sadaf  |    25000 | 1997-06-16 | 2021-05-15 |
++------+--------+----------+------------+------------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call soul(7).
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE bushra.soul; expected 2, got 1
+mysql> create procedure soul(IN t_sa int, IN t_i int(20))
+    -> begin
+    -> select* from teachers where t_salary=t_sa AND t_id=t_i;/.
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/' at line 3
+mysql> create procedure sole (IN t_sa int, IN t_i int(20))
+    -> begin
+    -> select* from teachers where t_salary=t_sa AND t_id=t_i;
+    -> end.
+Query OK, 0 rows affected, 1 warning (0.18 sec)
+
+mysql> call sole(25000,7).
++------+--------+----------+------------+------------+
+| t_id | t_name | t_salary | t_DOB      | t_Hdate    |
++------+--------+----------+------------+------------+
+|    7 | ilyas  |    25000 | 1996-07-28 | 2018-09-17 |
++------+--------+----------+------------+------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create procedure sol (IN t_Hd int, IN t_DO int(20))
+    -> begin
+    -> select * teachers where t_name=t_na AND t_id=td:
+    -> end.
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'teachers where t_name=t_na AND t_id=td:
+end' at line 3
+mysql> create procedure sol (IN t_HD int, OUT t_DO int(20))
+    -> begin
+    -> select * from teachers where t_name=t_na  ^C
+mysql> create procedure sol (IN )

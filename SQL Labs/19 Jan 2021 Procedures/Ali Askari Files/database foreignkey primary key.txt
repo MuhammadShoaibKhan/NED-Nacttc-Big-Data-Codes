@@ -1,0 +1,160 @@
+mysql> CREATE TABLE customers(custNo int(11),
+    -> custNm varchar(255),
+    -> contLastNm varchar(255),
+    -> contFirstNm varchar(255),
+    -> ph int(11),
+    -> addLine1 varchar(255),
+    -> addLine2 varchar(255),
+    -> city varchar(255),
+    -> state varchar(255),
+    -> postCode int(11),
+    -> country varchar(255),
+    -> salesRepEmpNo int(11),
+    -> credLim int(11));
+Query OK, 0 rows affected, 5 warnings (1.03 sec)
+
+mysql> ALTER TABLE customers CHANGE custNo custNo int(11) PRIMARY KEY;
+Query OK, 0 rows affected, 1 warning (0.53 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc customers;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| custNo        | int          | NO   | PRI | NULL    |       |
+| custNm        | varchar(255) | YES  |     | NULL    |       |
+| contLastNm    | varchar(255) | YES  |     | NULL    |       |
+| contFirstNm   | varchar(255) | YES  |     | NULL    |       |
+| ph            | int          | YES  |     | NULL    |       |
+| addLine1      | varchar(255) | YES  |     | NULL    |       |
+| addLine2      | varchar(255) | YES  |     | NULL    |       |
+| city          | varchar(255) | YES  |     | NULL    |       |
+| state         | varchar(255) | YES  |     | NULL    |       |
+| postCode      | int          | YES  |     | NULL    |       |
+| country       | varchar(255) | YES  |     | NULL    |       |
+| salesRepEmpNo | int          | YES  |     | NULL    |       |
+| credLim       | int          | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+13 rows in set (0.02 sec)
+
+mysql> CREATE TABLE orders(ordNo int(11) PRIMARY KEY,
+    -> ordDate varchar(255),
+    -> reqDate varchar(255),
+    -> shipDate varchar(255),
+    -> status varchar(255),
+    -> comments varchar(255),
+    -> FORIEGN KEY(ordNo) REFERENCES customers(custNo));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'KEY(ordNo) REFERENCES customers(custNo))' at line 7
+mysql> FOREIGN KEY(custNo) REFERENCES customers(custNo));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY(custNo) REFERENCES customers(custNo))' at line 1
+mysql> CREATE TABLE orders(ordNo int(11) PRIMARY KEY,
+    -> ordDate varchar(255),
+    -> reqDate varchar(255),
+    -> shipDate varchar(255),
+    -> status varchar(255),
+    -> comments varchar(255),
+    -> FOREIGN KEY(ordNo) REFERENCES customers(custNo));
+Query OK, 0 rows affected, 1 warning (0.32 sec)
+
+mysql> DROP customers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'customers' at line 1
+mysql> desc orders;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| ordNo    | int          | NO   | PRI | NULL    |       |
+| ordDate  | varchar(255) | YES  |     | NULL    |       |
+| reqDate  | varchar(255) | YES  |     | NULL    |       |
+| shipDate | varchar(255) | YES  |     | NULL    |       |
+| status   | varchar(255) | YES  |     | NULL    |       |
+| comments | varchar(255) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+6 rows in set (0.05 sec)
+
+mysql> desc customers;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| custNo        | int          | NO   | PRI | NULL    |       |
+| custNm        | varchar(255) | YES  |     | NULL    |       |
+| contLastNm    | varchar(255) | YES  |     | NULL    |       |
+| contFirstNm   | varchar(255) | YES  |     | NULL    |       |
+| ph            | int          | YES  |     | NULL    |       |
+| addLine1      | varchar(255) | YES  |     | NULL    |       |
+| addLine2      | varchar(255) | YES  |     | NULL    |       |
+| city          | varchar(255) | YES  |     | NULL    |       |
+| state         | varchar(255) | YES  |     | NULL    |       |
+| postCode      | int          | YES  |     | NULL    |       |
+| country       | varchar(255) | YES  |     | NULL    |       |
+| salesRepEmpNo | int          | YES  |     | NULL    |       |
+| credLim       | int          | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+13 rows in set (0.00 sec)
+
+mysql> CREATE TABLE orders(ordNo int(11) PRIMARY KEY,
+    -> ordDate varchar(255),
+    -> reqDate varchar(255),
+    -> shipDate varchar(255),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> DROP table orders;
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> CREATE TABLE orders(ordNo int(11) PRIMARY KEY,
+    -> ordDate varchar(255),
+    -> reqDate varchar(255),
+    -> shipDate varchar(255),
+    -> status varchar(255),
+    -> comments varchar(255),
+    -> custNo int(11),
+    -> FOREIGN KEY(custNo) REFERENCES customers(custNo));
+Query OK, 0 rows affected, 2 warnings (0.54 sec)
+
+mysql> desc orders;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| ordNo    | int          | NO   | PRI | NULL    |       |
+| ordDate  | varchar(255) | YES  |     | NULL    |       |
+| reqDate  | varchar(255) | YES  |     | NULL    |       |
+| shipDate | varchar(255) | YES  |     | NULL    |       |
+| status   | varchar(255) | YES  |     | NULL    |       |
+| comments | varchar(255) | YES  |     | NULL    |       |
+| custNo   | int          | YES  | MUL | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> DROP orders;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'orders' at line 1
+mysql> DROP table orders;
+Query OK, 0 rows affected (0.63 sec)
+
+mysql> CREATE TABLE orders(ordNo int(11) PRIMARY KEY,
+    -> ordDate varchar(255),
+    -> reqDate varchar(255),
+    -> shipDate varchar(255),
+    -> status varchar(255),
+    -> comments varchar(255),
+    -> FOREIGN KEY(custNo) REFERENCES customers(custNo));
+ERROR 1072 (42000): Key column 'custNo' doesn't exist in table
+mysql> CREATE TABLE orders(ordNo int(11) PRIMARY KEY,
+    -> ordDate varchar(255),
+    -> reqDate varchar(255),
+    -> shipDate varchar(255),
+    -> status varchar(255),
+    -> comments varchar(255),
+    -> custNo int(11),
+    -> FOREIGN KEY(custNo) REFERENCES customers(custNo));
+Query OK, 0 rows affected, 2 warnings (0.90 sec)
+
+mysql> drop table orders;
+Query OK, 0 rows affected (0.45 sec)
+
+mysql> CREATE TABLE orders(ordNo int(11) PRIMARY KEY,
+    -> ordDate varchar(255),
+    -> reqDate varchar(255),
+    -> shipDate varchar(255),
+    -> status varchar(255),
+    -> comments varchar(255),
+    -> FOREIGN KEY(ordNo) REFERENCES customers(custNo));
+Query OK, 0 rows affected, 1 warning (0.25 sec)

@@ -1,0 +1,252 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| teachers           |
+| world              |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> select teachers;
+ERROR 1054 (42S22): Unknown column 'teachers' in 'field list'
+mysql> use teachers;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_teachers |
++--------------------+
+| departmet          |
+| employe            |
+| teachers           |
++--------------------+
+3 rows in set (0.06 sec)
+
+mysql> select * from teachers;
++------+-------+--------+------------+------------+
+| id   | Name  | salary | DOB        | JoingData  |
++------+-------+--------+------------+------------+
+|    1 | Kumar |   2345 | 2001-12-01 | 2018-01-01 |
+|    1 | Kumar |   2345 | 1999-12-01 | 2017-01-01 |
+|    2 | Rahul |   2345 | 1999-12-01 | 2017-01-01 |
++------+-------+--------+------------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from employe;
++------+--------+--------+
+| e_id | e_Name | salary |
++------+--------+--------+
+|    1 | Kumar  |   2220 |
+|    2 | Hunain |  21001 |
+|    3 | Waqar  |  20000 |
++------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> delimiter //
+mysql> create procedure spGetEmployees()
+    -> Begin
+    -> Select * from employe;
+    -> end //
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> call spGetEmployees();
+    -> ^C
+mysql> call spGetEmployees()//
++------+--------+--------+
+| e_id | e_Name | salary |
++------+--------+--------+
+|    1 | Kumar  |   2220 |
+|    2 | Hunain |  21001 |
+|    3 | Waqar  |  20000 |
++------+--------+--------+
+3 rows in set (0.03 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create procedure spGetSalary()
+    -> Begin
+    -> Select * from employe where salary > 20000;
+    -> end //
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> call procedure spGetSalary()//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'procedure spGetSalary()' at line 1
+mysql> call procedure spGetSalary()//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'procedure spGetSalary()' at line 1
+mysql> create procedure spGetSalary()
+    -> Begin
+    -> Select * from employe where salary>=20000;
+    -> End //
+ERROR 1304 (42000): PROCEDURE spGetSalary already exists
+mysql> create procedure spGetSalary1()
+    -> Begin
+    -> Select * from employe where salary>=20000;
+    -> End //
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> call procedure spGetSalary1()//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'procedure spGetSalary1()' at line 1
+mysql> create procedure spVariable()
+    -> Begin
+    -> Declare X INT;
+    -> SET X = 2;
+    -> select * from employe where X = 2;
+    -> End //
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> call spVariable()//
++------+--------+--------+
+| e_id | e_Name | salary |
++------+--------+--------+
+|    1 | Kumar  |   2220 |
+|    2 | Hunain |  21001 |
+|    3 | Waqar  |  20000 |
++------+--------+--------+
+3 rows in set (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create procedure spVariable1()
+    -> Begin
+    -> Declare X INT;
+    -> SET X = 2;
+    -> select * from employe where e_id = X;
+    -> End //
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> call procedure spVariable1()//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'procedure spVariable1()' at line 1
+mysql> call spVariable1()//
++------+--------+--------+
+| e_id | e_Name | salary |
++------+--------+--------+
+|    2 | Hunain |  21001 |
++------+--------+--------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure spgetemployeeid(IN e_id INT)
+    -> Begin
+    -> Select * from employe where e_id = e_id;
+    -> End //
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> call spgetemployeeid(3)//
++------+--------+--------+
+| e_id | e_Name | salary |
++------+--------+--------+
+|    1 | Kumar  |   2220 |
+|    2 | Hunain |  21001 |
+|    3 | Waqar  |  20000 |
++------+--------+--------+
+3 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create procedure spgetemployeeid1(IN emp_id INT)
+    -> Begin
+    -> Select * from employe where e_id = emp_id;
+    -> End //
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> call spgetemployeeid1(3)
+    -> ^C
+mysql> call spgetemployeeid1(3)//
++------+--------+--------+
+| e_id | e_Name | salary |
++------+--------+--------+
+|    3 | Waqar  |  20000 |
++------+--------+--------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure spgetemployeeid2(IN emp_id INT, IN emp_name VARCHAR(255))
+    -> Begin
+    -> Select * from employe where e_id = emp_id AND e_Name = emp_name;
+    -> End //
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> call spgetemployeeid2(2, 'Hunain')//
++------+--------+--------+
+| e_id | e_Name | salary |
++------+--------+--------+
+|    2 | Hunain |  21001 |
++------+--------+--------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * from employe//
++------+--------+--------+
+| e_id | e_Name | salary |
++------+--------+--------+
+|    1 | Kumar  |   2220 |
+|    2 | Hunain |  21001 |
+|    3 | Waqar  |  20000 |
++------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT count(e_id) into total_emp from employe//
+ERROR 1327 (42000): Undeclared variable: total_emp
+mysql> CREATE PROCEDURE checkk(OUT total_emp INT)
+    -> BEGIN
+    -> SELECT count(e_id) into total_emp from employe//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> CREATE PROCEDURE checkk(OUT total_emp INT)
+    -> BEGIN
+    -> SELECT count(e_id) into total_emp from employe;
+    -> END//
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CALL checkk(@total_emp)//
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT @total_emp//
++------------+
+| @total_emp |
++------------+
+|          3 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> create procedure inout(IN emp_id INT, OUT previous_salary INT, INOUT current_salary INT)
+    -> begin
+    -> select salary into previous_salary from employe where e_id=emp id;
+    -> UPDATE employe
+    -> SET salary = current_salary
+    -> where employee_id = emp_id;
+    -> end //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inout(IN emp_id INT, OUT previous_salary INT, INOUT current_salary INT)
+begin
+se' at line 1
+mysql> create procedure inputoutput(IN emp_id INT, OUT previous_salary INT, INOUT current_salary INT)
+    -> Begin
+    -> select salary into previous_salary from employe where e_id=emp id;
+    -> UPDATE employe
+    -> SET salary = current_salary
+    -> where employee_id = emp_id;
+    -> End //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id;
+UPDATE employe
+SET salary = current_salary
+where employee_id = emp_id;
+End' at line 3
+mysql> create procedure inputoutput(IN emp_id INT, OUT previous_salary INT, INOUT current_salary INT)
+    -> Begin
+    -> select salary into previous_salary from employe where e_id=emp id;
+    -> UPDATE employe
+    -> SET salary = current_salary
+    -> where e_id = emp_id;
+    -> End //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id;
+UPDATE employe
+SET salary = current_salary
+where e_id = emp_id;
+End' at line 3
+mysql>

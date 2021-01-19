@@ -1,0 +1,300 @@
+mysql: [Warning] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe: ignoring option '--no-beep' due to invalid value ''.
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| ncbc               |
+| performance_schema |
+| sakila             |
+| shcool             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.01 sec)
+
+mysql> use school;
+ERROR 1049 (42000): Unknown database 'school'
+mysql> use shcool;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_shcool |
++------------------+
+| products         |
+| student          |
++------------------+
+2 rows in set (0.04 sec)
+
+mysql> show products;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'products' at line 1
+mysql> create database date format;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'format' at line 1
+mysql> create database date_format;
+Query OK, 1 row affected (0.13 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| date_format        |
+| information_schema |
+| mysql              |
+| ncbc               |
+| performance_schema |
+| sakila             |
+| shcool             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.01 sec)
+
+mysql> use date_format;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_date_format |
++-----------------------+
+| employees             |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees;
++--------+-----------------+------------+------------+
+| emp_id | emp_name        | emp_dob    | emp_salary |
++--------+-----------------+------------+------------+
+|      1 | Shahbaz Hussain | 1975-12-03 |      25000 |
+|      2 | Abbas Aslam     | 1989-04-05 |      37000 |
+|      3 | Rubina Khan     | 1995-05-12 |      45000 |
+|      4 | Rehan Jahangir  | 1988-12-23 |      22000 |
+|      5 | Hassan Iqbal    | 1986-05-22 |      22000 |
+|      6 | Anwar Alam      | 1978-11-03 |      33000 |
++--------+-----------------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employees;
++--------+-----------------+------------+------------+
+| emp_id | emp_name        | emp_dob    | emp_salary |
++--------+-----------------+------------+------------+
+|      1 | Shahbaz Hussain | 1975-12-03 |      25000 |
+|      2 | Abbas Aslam     | 1989-04-05 |      37000 |
+|      3 | Rubina Khan     | 1995-05-12 |      45000 |
+|      4 | Rehan Jahangir  | 1988-12-23 |      22000 |
+|      5 | Hassan Iqbal    | 1986-05-22 |      22000 |
+|      6 | Anwar Alam      | 1978-11-03 |      33000 |
+|      7 | Kashif Hameed   | 1998-12-05 |      30000 |
+|      8 | Faizan Khan     | 1995-01-15 |      60000 |
+|      9 | Wajeeh Mirza    | 1993-09-25 |      48000 |
+|     10 | Ali Haider      | 1999-06-07 |      50000 |
++--------+-----------------+------------+------------+
+10 rows in set (0.02 sec)
+
+mysql> select * from university project;
+ERROR 1146 (42S02): Table 'date_format.university' doesn't exist
+mysql> show tables;
++-----------------------+
+| Tables_in_date_format |
++-----------------------+
+| employees             |
+| university project    |
++-----------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from university project;
+ERROR 1146 (42S02): Table 'date_format.university' doesn't exist
+mysql> use date_format;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_date_format |
++-----------------------+
+| employees             |
+| university project    |
++-----------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from university project;
+ERROR 1146 (42S02): Table 'date_format.university' doesn't exist
+mysql> select * from university project;
+ERROR 1146 (42S02): Table 'date_format.university' doesn't exist
+mysql> select * from university project;
+ERROR 1146 (42S02): Table 'date_format.university' doesn't exist
+mysql> select * from university_project;
++---------+-----------+------------+------+
+| stud_id | stud_name | ad-date    | ages |
++---------+-----------+------------+------+
+|       3 | Naveed    | 2002-12-19 |   18 |
+|       5 | Fareed    | 2000-09-25 |   15 |
+|      18 | Baseer    | 2012-06-08 |   22 |
+|      25 | Hameed    | 2015-10-27 |   19 |
+|      46 | Danish    | 2018-04-17 |   23 |
++---------+-----------+------------+------+
+5 rows in set (0.01 sec)
+
+mysql> select * from employees;
++--------+-----------------+------------+------------+
+| emp_id | emp_name        | emp_dob    | emp_salary |
++--------+-----------------+------------+------------+
+|      1 | Shahbaz Hussain | 1975-12-03 |      25000 |
+|      2 | Abbas Aslam     | 1989-04-05 |      37000 |
+|      3 | Rubina Khan     | 1995-05-12 |      45000 |
+|      4 | Rehan Jahangir  | 1988-12-23 |      22000 |
+|      5 | Hassan Iqbal    | 1986-05-22 |      22000 |
+|      6 | Anwar Alam      | 1978-11-03 |      33000 |
+|      7 | Kashif Hameed   | 1998-12-05 |      30000 |
+|      8 | Faizan Khan     | 1995-01-15 |      60000 |
+|      9 | Wajeeh Mirza    | 1993-09-25 |      48000 |
+|     10 | Ali Haider      | 1999-06-07 |      50000 |
++--------+-----------------+------------+------------+
+10 rows in set (0.03 sec)
+
+mysql> SELECT CURRENT_dATE;
++--------------+
+| CURRENT_dATE |
++--------------+
+| 2021-01-05   |
++--------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT NOW();
++---------------------+
+| NOW()               |
++---------------------+
+| 2021-01-05 18:34:07 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT VERSION();
++-----------+
+| VERSION() |
++-----------+
+| 8.0.22    |
++-----------+
+1 row in set (0.01 sec)
+
+mysql> select * from employees;
++--------+-----------------+------------+------------+--------------+
+| emp_id | emp_name        | emp_dob    | emp_salary | hirring_date |
++--------+-----------------+------------+------------+--------------+
+|      1 | Shahbaz Hussain | 1975-12-03 |      25000 | 2019-12-01   |
+|      2 | Abbas Aslam     | 1989-04-05 |      37000 | 2015-02-03   |
+|      3 | Rubina Khan     | 1995-05-12 |      45000 | 2012-10-10   |
+|      4 | Rehan Jahangir  | 1988-12-23 |      22000 | 2013-11-05   |
+|      5 | Hassan Iqbal    | 1986-05-22 |      22000 | 2018-09-11   |
+|      6 | Anwar Alam      | 1978-11-03 |      33000 | 2013-05-27   |
+|      7 | Kashif Hameed   | 1998-12-05 |      30000 | 2012-12-03   |
+|      8 | Faizan Khan     | 1995-01-15 |      60000 | 2015-05-21   |
+|      9 | Wajeeh Mirza    | 1993-09-25 |      48000 | 2019-12-01   |
+|     10 | Ali Haider      | 1999-06-07 |      50000 | 2016-12-01   |
++--------+-----------------+------------+------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT CURRENT_dATE;
++--------------+
+| CURRENT_dATE |
++--------------+
+| 2021-01-05   |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT NOW();
++---------------------+
+| NOW()               |
++---------------------+
+| 2021-01-05 18:40:25 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT VERSION();
++-----------+
+| VERSION() |
++-----------+
+| 8.0.22    |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name,hirring_date,timestampdiff(YEAR,hirring_date,Curdate()) from tb_name;
+ERROR 1146 (42S02): Table 'date_format.tb_name' doesn't exist
+mysql> select emp_name,hirring_date,timestampdiff(YEAR,hirring_date,Curdate()) from employees;
++-----------------+--------------+--------------------------------------------+
+| emp_name        | hirring_date | timestampdiff(YEAR,hirring_date,Curdate()) |
++-----------------+--------------+--------------------------------------------+
+| Shahbaz Hussain | 2019-12-01   |                                          1 |
+| Abbas Aslam     | 2015-02-03   |                                          5 |
+| Rubina Khan     | 2012-10-10   |                                          8 |
+| Rehan Jahangir  | 2013-11-05   |                                          7 |
+| Hassan Iqbal    | 2018-09-11   |                                          2 |
+| Anwar Alam      | 2013-05-27   |                                          7 |
+| Kashif Hameed   | 2012-12-03   |                                          8 |
+| Faizan Khan     | 2015-05-21   |                                          5 |
+| Wajeeh Mirza    | 2019-12-01   |                                          1 |
+| Ali Haider      | 2016-12-01   |                                          4 |
++-----------------+--------------+--------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select emp_name,hirring_date,timestampdiff(MONTH,hirring_date,Curdate()) from employees;
++-----------------+--------------+---------------------------------------------+
+| emp_name        | hirring_date | timestampdiff(MONTH,hirring_date,Curdate()) |
++-----------------+--------------+---------------------------------------------+
+| Shahbaz Hussain | 2019-12-01   |                                          13 |
+| Abbas Aslam     | 2015-02-03   |                                          71 |
+| Rubina Khan     | 2012-10-10   |                                          98 |
+| Rehan Jahangir  | 2013-11-05   |                                          86 |
+| Hassan Iqbal    | 2018-09-11   |                                          27 |
+| Anwar Alam      | 2013-05-27   |                                          91 |
+| Kashif Hameed   | 2012-12-03   |                                          97 |
+| Faizan Khan     | 2015-05-21   |                                          67 |
+| Wajeeh Mirza    | 2019-12-01   |                                          13 |
+| Ali Haider      | 2016-12-01   |                                          49 |
++-----------------+--------------+---------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select emp_name,hirring_date,timestampdiff(DAYS,hirring_date,Curdate()) from employees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DAYS,hirring_date,Curdate()) from employees' at line 1
+mysql> select emp_name,hirring_date,timestampdiff(DAY,hirring_date,Curdate()) from employees;
++-----------------+--------------+-------------------------------------------+
+| emp_name        | hirring_date | timestampdiff(DAY,hirring_date,Curdate()) |
++-----------------+--------------+-------------------------------------------+
+| Shahbaz Hussain | 2019-12-01   |                                       401 |
+| Abbas Aslam     | 2015-02-03   |                                      2163 |
+| Rubina Khan     | 2012-10-10   |                                      3009 |
+| Rehan Jahangir  | 2013-11-05   |                                      2618 |
+| Hassan Iqbal    | 2018-09-11   |                                       847 |
+| Anwar Alam      | 2013-05-27   |                                      2780 |
+| Kashif Hameed   | 2012-12-03   |                                      2955 |
+| Faizan Khan     | 2015-05-21   |                                      2056 |
+| Wajeeh Mirza    | 2019-12-01   |                                       401 |
+| Ali Haider      | 2016-12-01   |                                      1496 |
++-----------------+--------------+-------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT emp_name,emp_dob,month(emp_dob) from employees;
++-----------------+------------+----------------+
+| emp_name        | emp_dob    | month(emp_dob) |
++-----------------+------------+----------------+
+| Shahbaz Hussain | 1975-12-03 |             12 |
+| Abbas Aslam     | 1989-04-05 |              4 |
+| Rubina Khan     | 1995-05-12 |              5 |
+| Rehan Jahangir  | 1988-12-23 |             12 |
+| Hassan Iqbal    | 1986-05-22 |              5 |
+| Anwar Alam      | 1978-11-03 |             11 |
+| Kashif Hameed   | 1998-12-05 |             12 |
+| Faizan Khan     | 1995-01-15 |              1 |
+| Wajeeh Mirza    | 1993-09-25 |              9 |
+| Ali Haider      | 1999-06-07 |              6 |
++-----------------+------------+----------------+
+10 rows in set (0.00 sec)

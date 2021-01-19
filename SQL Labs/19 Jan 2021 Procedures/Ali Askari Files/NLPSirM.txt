@@ -1,0 +1,9 @@
+Stop words
+Lemmatization and stemming:
+run,ran,running...all are same
+TEXTBLOB
+N-grams:
+mono-gram
+bi-gram
+tri-gram
+flower, flower vase, flower vase price...

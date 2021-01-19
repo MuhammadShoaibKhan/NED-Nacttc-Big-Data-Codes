@@ -1,0 +1,338 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| hr                 |
+| information_schema |
+| mysql              |
+| nimra              |
+| performance_schema |
+| sakila             |
+| school             |
+| students           |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.14 sec)
+
+mysql> use school;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_school |
++------------------+
+| course           |
+| student          |
+| teacher          |
++------------------+
+3 rows in set (0.06 sec)
+
+mysql> select * from course;
++------+---------+
+| c_id | c_name  |
++------+---------+
+|   11 | SCIENCE |
+|   21 | MATH    |
++------+---------+
+2 rows in set (0.09 sec)
+
+mysql> select * from student;
++--------+----------+-----------+
+| std_id | std_name | std_marks |
++--------+----------+-----------+
+|      1 | sheeba   |       100 |
+|      2 | sadaf    |        98 |
+|      3 | bushra   |        99 |
+|      4 | masood   |        50 |
+|      1 | sheeba   |       100 |
+|      2 | sadaf    |        98 |
+|      3 | bushra   |        99 |
+|      4 | masood   |        50 |
+|      7 | talha    |        67 |
+|      9 | sameer   |        65 |
++--------+----------+-----------+
+10 rows in set (0.04 sec)
+
+mysql> select * from teacher;
++------+--------+--------+-----------+
+| t_id | t_name | std_id | std_marks |
++------+--------+--------+-----------+
+|    1 | Umair  |      1 |       100 |
+|    2 | Enayat |      2 |        98 |
+|    3 | Farha  |      3 |        90 |
+|    4 | Masood |      4 |        50 |
+|    1 | Umair  |      1 |       100 |
+|    2 | Enayat |      2 |        98 |
+|    3 | Farha  |      3 |        90 |
+|    4 | Masood |      4 |        50 |
+|    5 | nimra  |      6 |        76 |
+|    6 | sadaf  |      8 |        80 |
++------+--------+--------+-----------+
+10 rows in set (0.03 sec)
+
+mysql> use hr;
+Database changed
+mysql> show tables;
++--------------+
+| Tables_in_hr |
++--------------+
+| employees    |
+| employeess   |
+| sales        |
++--------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employees;
++--------+---------------+----------------------------+--------------+--------+
+| EMP_ID | EMP_NAME      | DESIGNATION                | DEPARTMENT   | SALARY |
++--------+---------------+----------------------------+--------------+--------+
+|      1 | TAHA MEHMOOD  | HR MANAGER                 | HR           |  50000 |
+|      1 | SHEEBA KHAN   | ASSISTANT HR MANAGER       | HR           |  40000 |
+|      1 | NIMRA RIFAQAT | PLANT ELECTRONICS ENGINEER | ELECTRONICS  |  70000 |
+|      1 | DILSHAD       | IT MANAGER                 | IT           |  80000 |
+|      5 | ZAFAR         | NETWORK ENGINEER           | NETWORK      |  90000 |
+|      6 | ALI ASKARI    | DATA ANALYST               | DATA SCIENCE | 100000 |
+|      7 | QADIR         | PROGRAMMER                 | IT           |  50000 |
++--------+---------------+----------------------------+--------------+--------+
+7 rows in set (0.04 sec)
+
+mysql>  create procedure getEmployee()
+    -> begin
+    -> select * from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> delimeter //
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delimeter //' at line 1
+mysql> \d \\
+ERROR:
+DELIMITER cannot contain a backslash character
+mysql> \d //
+mysql>  create procedure getEmployee()
+    -> begin
+    -> select * from employee;
+    -> end//
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> call getEmployee()//
+ERROR 1146 (42S02): Table 'hr.employee' doesn't exist
+mysql> call getEmployee()//
+ERROR 1146 (42S02): Table 'hr.employee' doesn't exist
+mysql>  create procedure getEmployee()
+    -> begin
+    -> select * from employees;
+    -> end//
+ERROR 1304 (42000): PROCEDURE getEmployee already exists
+mysql>  create procedure getEmployees()
+    -> begin
+    -> select * from employees;
+    -> end//
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> call getEmployees()//
++--------+---------------+----------------------------+--------------+--------+
+| EMP_ID | EMP_NAME      | DESIGNATION                | DEPARTMENT   | SALARY |
++--------+---------------+----------------------------+--------------+--------+
+|      1 | TAHA MEHMOOD  | HR MANAGER                 | HR           |  50000 |
+|      1 | SHEEBA KHAN   | ASSISTANT HR MANAGER       | HR           |  40000 |
+|      1 | NIMRA RIFAQAT | PLANT ELECTRONICS ENGINEER | ELECTRONICS  |  70000 |
+|      1 | DILSHAD       | IT MANAGER                 | IT           |  80000 |
+|      5 | ZAFAR         | NETWORK ENGINEER           | NETWORK      |  90000 |
+|      6 | ALI ASKARI    | DATA ANALYST               | DATA SCIENCE | 100000 |
+|      7 | QADIR         | PROGRAMMER                 | IT           |  50000 |
++--------+---------------+----------------------------+--------------+--------+
+7 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create procedure Action()
+    -> begin
+    -> select from employees where SALARY> 40000;
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employees where SALARY> 40000;
+end' at line 3
+mysql> create procedure Action()
+    -> begin
+    -> select * from employees where SALARY>40000;
+    -> end//
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> call Action()//
++--------+---------------+----------------------------+--------------+--------+
+| EMP_ID | EMP_NAME      | DESIGNATION                | DEPARTMENT   | SALARY |
++--------+---------------+----------------------------+--------------+--------+
+|      1 | TAHA MEHMOOD  | HR MANAGER                 | HR           |  50000 |
+|      1 | NIMRA RIFAQAT | PLANT ELECTRONICS ENGINEER | ELECTRONICS  |  70000 |
+|      1 | DILSHAD       | IT MANAGER                 | IT           |  80000 |
+|      5 | ZAFAR         | NETWORK ENGINEER           | NETWORK      |  90000 |
+|      6 | ALI ASKARI    | DATA ANALYST               | DATA SCIENCE | 100000 |
+|      7 | QADIR         | PROGRAMMER                 | IT           |  50000 |
++--------+---------------+----------------------------+--------------+--------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create procedure Action1()
+    -> begin
+    -> declare x int
+    -> declare x int;
+    -> set x=6;
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'declare x int;
+set x=6;
+end' at line 4
+mysql> create procedure Action1()
+    -> begin
+    -> declare x int;
+    -> set x=6;
+    -> select * from employees where EMP_ID=x;
+    -> end//
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> call Action1()//
++--------+------------+--------------+--------------+--------+
+| EMP_ID | EMP_NAME   | DESIGNATION  | DEPARTMENT   | SALARY |
++--------+------------+--------------+--------------+--------+
+|      6 | ALI ASKARI | DATA ANALYST | DATA SCIENCE | 100000 |
++--------+------------+--------------+--------------+--------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure getEmployeeByID(IN emp_id)
+    -> BEGIN
+    -> SELECT * from employees where EMP_ID=emp_id;
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+BEGIN
+SELECT * from employees where EMP_ID=emp_id;
+end' at line 1
+mysql> create procedure getEmployeeByID(IN emp_id INT)
+    -> BEGIN
+    -> SELECT * FROM employees WHERE EMP_ID=emp_id;
+    -> END//
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> CALL getEmployeeByID(6)//
++--------+---------------+----------------------------+--------------+--------+
+| EMP_ID | EMP_NAME      | DESIGNATION                | DEPARTMENT   | SALARY |
++--------+---------------+----------------------------+--------------+--------+
+|      1 | TAHA MEHMOOD  | HR MANAGER                 | HR           |  50000 |
+|      1 | SHEEBA KHAN   | ASSISTANT HR MANAGER       | HR           |  40000 |
+|      1 | NIMRA RIFAQAT | PLANT ELECTRONICS ENGINEER | ELECTRONICS  |  70000 |
+|      1 | DILSHAD       | IT MANAGER                 | IT           |  80000 |
+|      5 | ZAFAR         | NETWORK ENGINEER           | NETWORK      |  90000 |
+|      6 | ALI ASKARI    | DATA ANALYST               | DATA SCIENCE | 100000 |
+|      7 | QADIR         | PROGRAMMER                 | IT           |  50000 |
++--------+---------------+----------------------------+--------------+--------+
+7 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create procedure getEmployeeById(IN id INT)
+    -> BEGIN
+    -> SELECT * FROM employees WHERE EMP_ID=id;
+    -> END//
+ERROR 1304 (42000): PROCEDURE getEmployeeById already exists
+mysql> create procedure EmployeeById(IN id INT)
+    -> BEGIN
+    -> SELECT * FROM employees WHERE EMP_ID=id;
+    -> END//
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> CALL EmployeeByID(6)//
++--------+------------+--------------+--------------+--------+
+| EMP_ID | EMP_NAME   | DESIGNATION  | DEPARTMENT   | SALARY |
++--------+------------+--------------+--------------+--------+
+|      6 | ALI ASKARI | DATA ANALYST | DATA SCIENCE | 100000 |
++--------+------------+--------------+--------------+--------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure EmployeeIDandName(in id int,in name varchar(255))
+    -> begin
+    -> select * from employees where EMP_ID=id and EMP_NAME=name;
+    -> end//
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> call EmployeeIDandName(1,'TAHA MEHMOOD')//
++--------+--------------+-------------+------------+--------+
+| EMP_ID | EMP_NAME     | DESIGNATION | DEPARTMENT | SALARY |
++--------+--------------+-------------+------------+--------+
+|      1 | TAHA MEHMOOD | HR MANAGER  | HR         |  50000 |
++--------+--------------+-------------+------------+--------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call EmployeeIDandName(1,'ALI ASKARI')//
+Empty set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure OutTotalEmp(out total_employees int)
+    -> begin
+    -> select count(EMP_NAME) into total_employees from employees;
+    -> end//
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> call OutTotalEmp(@totalEmp)//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select @totalEmp//
++-----------+
+| @totalEmp |
++-----------+
+|         7 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> call OutTotalEmp(@totalEmp);
+    -> select @totalEmp//
+Query OK, 1 row affected (0.00 sec)
+
++-----------+
+| @totalEmp |
++-----------+
+|         7 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> create procedure UpdateSal(in id, int, out previous_salary decimal(8,2),inout current_salary decimal(8,2))
+    -> begin
+    -> ^c
+    -> exit
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', int, out previous_salary decimal(8,2),inout current_salary decimal(8,2))
+begin' at line 1
+mysql> create procedure UpdateSal(in id int, out previous_salary decimal(8,2),inout current_salary decimal(8,2))
+    -> begin
+    -> select SALARY into previous_salary from employees;
+    -> where//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where' at line 4
+mysql> create procedure UpdateSal(in id int, out previous_salary decimal(8,2),inout current_salary decimal(8,2))
+    -> begin
+    -> select SALARY into previous_salary from employees where EMP_ID=id;
+    -> update employees
+    -> set SALARY =current_salary where EMP_ID=id;
+    -> end//
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> set @Empid=6;
+    -> set @newsal=60000.00;
+    -> call UpdateSal(@Empid,@preSal,@newsal);
+    -> select @presal as 'Previous_Salary',@newsal as 'New_Salary'//
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.10 sec)
+
++-----------------+------------+
+| Previous_Salary | New_Salary |
++-----------------+------------+
+|       100000.00 |   60000.00 |
++-----------------+------------+
+1 row in set (0.10 sec)
+
+mysql>

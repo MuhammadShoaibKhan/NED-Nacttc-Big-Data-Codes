@@ -1,0 +1,65 @@
+mysql> create table empSalary (id INT(6), name varchar(55), salary int(6), avgsalary int(6));
+
+
+
+mysql> insert into empSalary(id, name, salary, avgsalary) values(1, 'TAHA', 150000, 55000);
+
+
+mysql> insert into empSalary(id, name, salary, avgsalary) values(2, 'ZAHID', 120000, 55000);
+
+
+mysql> insert into empSalary(id, name, salary, avgsalary) values(3, 'DILSHAD', 300000, 55000);
+
+
+
+mysql> select * from empSalary;
++------+---------+--------+-----------+
+| id   | name    | salary | avgsalary |
++------+---------+--------+-----------+
+|    1 | TAHA    | 150000 |     55000 |
+|    2 | ZAHID   | 120000 |     55000 |
+|    3 | DILSHAD | 300000 |     55000 |
++------+---------+--------+-----------+
+3 rows in set (0.00 sec)
+
+
+
+mysql> DELIMITER //
+
+
+mysql> create procedure salaryStatus(IN emp_id INT, OUT salary_status VARCHAR(255))
+    -> BEGIN
+    -> DECLARE current_salary DECIMAL(8,2);
+    -> DECLARE average_salary DECIMAL(8,2);
+    -> select AVG(salary) INTO average_salary FROM empSalary;
+    -> select salary INTO current_salary from empSalary
+    -> Where id = emp_id;
+    -> if current_salary<average_salary THEN
+    -> SET salary_status = 'Less than Average Salary';
+    -> ELSEIF current_salary = average_salary THEN
+    -> SET salary_status = 'Equal to Average Salary';
+    -> ELSEIF current_salary>average_salary THEN
+    -> SET salary_status = 'Greater than average salary';
+    -> END IF;
+    -> END //
+Query OK, 0 rows affected (0.18 sec)
+
+
+
+mysql> SET @EmpID = '1'//
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+mysql> Call SalaryStatus(@EmpId, @SalaryStatus)//
+Query OK, 1 row affected (0.02 sec)
+
+
+
+mysql> SELECT @SalaryStatus AS 'Salary Status of Employee' //
++-----------------------------+
+| Salary Status of Employee   |
++-----------------------------+
+| Greater than average salary |
++-----------------------------+
+1 row in set (0.00 sec)

@@ -1,0 +1,10 @@
+DELIMITER //
+
+
+CREATE PROCEDURE display()
+BEGIN
+SELECT * FROM teachers;
+END//
+
+
+DELIMITER ;

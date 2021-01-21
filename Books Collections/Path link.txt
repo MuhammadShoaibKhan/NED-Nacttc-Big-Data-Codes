@@ -1,0 +1,10 @@
+Code Link:
+https://colab.research.google.com/github/dphi-official/Machine_Learning_Bootcamp/blob/master/Data_Preparation_101/Data_Preparation_101.ipynb#scrollTo=EJ6EMbHdi-ed
+
+Video Link:
+https://www.youtube.com/watch?v=X6zz9Z2KDtU&list=PLKub218pIBvGkdq76SnHNYOBzZeFxrScl&index=3   
+
+
+https://github.com/amueller/introduction_to_ml_with_python   
+
+

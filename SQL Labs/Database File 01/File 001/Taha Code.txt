@@ -1,0 +1,571 @@
+mysql> \\h;
+ERROR:
+Unknown command '\\'.
+    -> \h;
+
+For information about MySQL products and services, visit:
+   http://www.mysql.com/
+For developer information, including the MySQL Reference Manual, visit:
+   http://dev.mysql.com/
+To buy MySQL Enterprise support, training, or other products, visit:
+   https://shop.mysql.com/
+
+List of all MySQL commands:
+Note that all text commands must be first on line and end with ';'
+?         (\?) Synonym for `help'.
+clear     (\c) Clear the current input statement.
+connect   (\r) Reconnect to the server. Optional arguments are db and host.
+delimiter (\d) Set statement delimiter.
+ego       (\G) Send command to mysql server, display result vertically.
+exit      (\q) Exit mysql. Same as quit.
+go        (\g) Send command to mysql server.
+help      (\h) Display this help.
+notee     (\t) Don't write into outfile.
+print     (\p) Print current command.
+prompt    (\R) Change your mysql prompt.
+quit      (\q) Quit mysql.
+rehash    (\#) Rebuild completion hash.
+source    (\.) Execute an SQL script file. Takes a file name as an argument.
+status    (\s) Get status information from the server.
+system    (\!) Execute a system shell command.
+tee       (\T) Set outfile [to_outfile]. Append everything into given outfile.
+use       (\u) Use another database. Takes database name as argument.
+charset   (\C) Switch to another charset. Might be needed for processing binlog with multi-byte charsets.
+warnings  (\W) Show warnings after every statement.
+nowarning (\w) Don't show warnings after every statement.
+resetconnection(\x) Clean session context.
+
+For server side help, type 'help contents'
+
+    -> \u;
+ERROR 1049 (42000): Unknown database ';'
+    -> \u//
+ERROR 1049 (42000): Unknown database '//'
+    -> \u;
+ERROR 1049 (42000): Unknown database ';'
+    -> \u//
+ERROR 1049 (42000): Unknown database '//'
+    -> \u\\
+ERROR 1049 (42000): Unknown database '\'
+    -> show databases;
+    -> show databases//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\\h;
+
+
+
+
+
+
+show databases;
+show databases' at line 1
+mysql> desc world;
+    -> describe world;
+    -> describe world//
+ERROR 1146 (42S02): Table 'world.world' doesn't exist
+mysql> show databases;
+    -> show databases//
++--------------------+
+| Database           |
++--------------------+
+| date_format        |
+| information_schema |
+| mysql              |
+| ncbc               |
+| performance_schema |
+| sakila             |
+| shcool             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
++--------------------+
+| Database           |
++--------------------+
+| date_format        |
+| information_schema |
+| mysql              |
+| ncbc               |
+| performance_schema |
+| sakila             |
+| shcool             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.01 sec)
+
+mysql> describe ncbc;
+    -> describe ncbc//
+ERROR 1146 (42S02): Table 'world.ncbc' doesn't exist
+mysql> select * from ncbc;
+    -> select * from ncbc//
+ERROR 1146 (42S02): Table 'world.ncbc' doesn't exist
+mysql> \h;
+
+For information about MySQL products and services, visit:
+   http://www.mysql.com/
+For developer information, including the MySQL Reference Manual, visit:
+   http://dev.mysql.com/
+To buy MySQL Enterprise support, training, or other products, visit:
+   https://shop.mysql.com/
+
+List of all MySQL commands:
+Note that all text commands must be first on line and end with ';'
+?         (\?) Synonym for `help'.
+clear     (\c) Clear the current input statement.
+connect   (\r) Reconnect to the server. Optional arguments are db and host.
+delimiter (\d) Set statement delimiter.
+ego       (\G) Send command to mysql server, display result vertically.
+exit      (\q) Exit mysql. Same as quit.
+go        (\g) Send command to mysql server.
+help      (\h) Display this help.
+notee     (\t) Don't write into outfile.
+print     (\p) Print current command.
+prompt    (\R) Change your mysql prompt.
+quit      (\q) Quit mysql.
+rehash    (\#) Rebuild completion hash.
+source    (\.) Execute an SQL script file. Takes a file name as an argument.
+status    (\s) Get status information from the server.
+system    (\!) Execute a system shell command.
+tee       (\T) Set outfile [to_outfile]. Append everything into given outfile.
+use       (\u) Use another database. Takes database name as argument.
+charset   (\C) Switch to another charset. Might be needed for processing binlog with multi-byte charsets.
+warnings  (\W) Show warnings after every statement.
+nowarning (\w) Don't show warnings after every statement.
+resetconnection(\x) Clean session context.
+
+For server side help, type 'help contents'
+
+mysql> \d ;
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| date_format        |
+| information_schema |
+| mysql              |
+| ncbc               |
+| performance_schema |
+| sakila             |
+| shcool             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use ncbc;
+Database changed
+mysql> describe ncbc;
+ERROR 1146 (42S02): Table 'ncbc.ncbc' doesn't exist
+mysql> describe * from ncbc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from ncbc' at line 1
+mysql> select * from ncbc;
+ERROR 1146 (42S02): Table 'ncbc.ncbc' doesn't exist
+mysql> Select * from ncbc;
+ERROR 1146 (42S02): Table 'ncbc.ncbc' doesn't exist
+mysql> use ncbc;
+Database changed
+mysql> use ncbc;
+Database changed
+mysql> select * from;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select * from ncbc;
+ERROR 1146 (42S02): Table 'ncbc.ncbc' doesn't exist
+mysql> show tables;
++----------------+
+| Tables_in_ncbc |
++----------------+
+| students       |
+| teachers       |
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from teachers;
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.04 sec)
+
+mysql> describe teachers;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int          | YES  |     | NULL    |       |
+| nm    | varchar(255) | YES  |     | NULL    |       |
+| fname | varchar(255) | YES  |     | NULL    |       |
+| sal   | float        | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> describe students;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int          | YES  |     | NULL    |       |
+| nm    | varchar(255) | YES  |     | NULL    |       |
+| fname | varchar(255) | YES  |     | NULL    |       |
+| grade | varchar(4)   | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> describe teachers;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int          | YES  |     | NULL    |       |
+| nm    | varchar(255) | YES  |     | NULL    |       |
+| fname | varchar(255) | YES  |     | NULL    |       |
+| sal   | float        | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from teachers;
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> delimiter//
+    -> \d //
+    -> show databases;
+    -> show databases//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delimiter//
+show databases;
+show databases' at line 1
+mysql> show databases//
++--------------------+
+| Database           |
++--------------------+
+| date_format        |
+| information_schema |
+| mysql              |
+| ncbc               |
+| performance_schema |
+| sakila             |
+| shcool             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> describe from ncbc;
+    -> Select * from ncbc;
+    -> Select * from ncbc//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from ncbc;
+Select * from ncbc;
+Select * from ncbc' at line 1
+mysql> Select * from ncbc//
+ERROR 1146 (42S02): Table 'ncbc.ncbc' doesn't exist
+mysql> use ncbc;
+ERROR 1049 (42000): Unknown database 'ncbc;'
+mysql> use ncbc//
+Database changed
+mysql> select * from ncbc;
+    -> describe ncbc;
+    -> describe ncbc//
+ERROR 1146 (42S02): Table 'ncbc.ncbc' doesn't exist
+mysql> describe * from ncbc;
+    -> describe * from ncbc//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from ncbc;
+describe * from ncbc' at line 1
+mysql> describe * from ncbc//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from ncbc' at line 1
+mysql> show tables ncbc;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ncbc' at line 1
+mysql> show tables ncbc//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ncbc' at line 1
+mysql> show databases;
+    -> //
++--------------------+
+| Database           |
++--------------------+
+| date_format        |
+| information_schema |
+| mysql              |
+| ncbc               |
+| performance_schema |
+| sakila             |
+| shcool             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use ncbc//
+Database changed
+mysql> show tables//
++----------------+
+| Tables_in_ncbc |
++----------------+
+| students       |
+| teachers       |
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teachers//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE PROCEDURE P1()
+    -> SELECT * FROM teachers;
+    -> //
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CREATE PROCEDURE P2()
+    -> BEGIN
+    -> SELECT * FROM teachers
+    -> where id=1 AND id=3;
+    -> END//
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CALL P2//
+Empty set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE PROCEDURE P3()
+    -> BEGIN
+    -> SELECT * FROM teachers
+    -> where id=1 OR id=3;
+    -> END//
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> call p2//
+Empty set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show teachers//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'teachers' at line 1
+mysql> Select *  from teachers//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> call p3//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+2 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE PROCEDURE P4(IN X INT)
+    -> BEGIN
+    -> Select * from teachers
+    -> WHERE id=X;
+    -> END//
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CALL P4(6)//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    6 | betat6 | abbat6 | 25000 |
++------+--------+--------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE PROCEDURE P5(IN X INT, IN Y VARCHAR);
+    -> Select * from teachers;
+    -> CREATE PROCEDURE P5(IN X INT, IN Y VARCHAR);
+    -> BEGIN
+    -> Select * from teachers;
+    -> WHERE ID=X, ID=Y AND NM=BETAT1;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ');
+Select * from teachers;
+CREATE PROCEDURE P5(IN X INT, IN Y VARCHAR);
+BEGIN
+Se' at line 1
+mysql> CREATE PROCEDURE P6(IN Y VARCHAR);
+    -> Select * from teachers;
+    -> X;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ');
+Select * from teachers;
+X' at line 1
+mysql> CREATE PROCEDURE P6(IN Y VARCHAR);
+    -> BEGIN
+    -> SELECT * FROM TEACHERS;
+    -> WHERE NM=Y;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ');
+BEGIN
+SELECT * FROM TEACHERS;
+WHERE NM=Y;
+END' at line 1
+mysql> CREATE PROCEDURE P6(IN Y VARCHAR);
+    -> BEGIN
+    -> Select * from teachers
+    -> WHERE NM=Y;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ');
+BEGIN
+Select * from teachers
+WHERE NM=Y;
+END' at line 1
+mysql> CREATE PROCEDURE P6(IN Y VARCHAR)
+    -> BEGIN
+    -> SELECT * FROM TEACHERS
+    -> WHERE NM=Y;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+BEGIN
+SELECT * FROM TEACHERS
+WHERE NM=Y;
+END' at line 1
+mysql> CREATE PROCEDURE P6(IN Y 'VARCHAR')
+    -> BEGIN
+    -> Select * from teachers
+    -> WHERE NM=Y;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''VARCHAR')
+BEGIN
+Select * from teachers
+WHERE NM=Y;
+END' at line 1
+mysql> CREATE PROCEDURE P6(IN Y VARCHAR')
+    '> BEGIN
+    '> SELECT * FROM TEACHERS
+    '> WHERE NM=Y;
+    '> END//
+    '> END//
+    '> FDSA
+    '> DD
+    '>
+    '>
+    '> DSEWDSF
+    '> //
+    '> ;
+    '> EXIT
+    '>
+    '> \\
+    '> \;
+    '> //
+    '> '
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '')
+BEGIN
+SELECT * FROM TEACHERS
+WHERE NM=Y;
+END//
+END//
+FDSA
+DD
+
+
+DSEWDSF
+//
+;
+E' at line 1
+mysql> CREATE PROCEDURE P7(IN Y VARCHAR)
+    -> BEGIN
+    -> SELECT * FROM TEACHERS
+    -> WHERE nm=Y;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+BEGIN
+SELECT * FROM TEACHERS
+WHERE nm=Y;
+END' at line 1
+mysql> CREATE PROCEDURE P7(IN Y VARCHAR(255))
+    -> BEGIN
+    -> SELECT * FROM TEACHERS
+    -> WHERE nm=Y;
+    -> END//
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CALL P7('betat1')//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
++------+--------+--------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE PROCEDURE P8(OUT Y VARCHAR(255))
+    -> BEGIN
+    -> COUNT(id) INTO Y;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'COUNT(id) INTO Y;
+END' at line 3
+mysql> CREATE PROCEDURE P8(OUT Y INT)
+    -> BEGIN
+    -> COUNT(id) INTO Y;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'COUNT(id) INTO Y;
+END' at line 3
+mysql> CREATE PROCEDURE P8(OUT Y INT)
+    -> BEGIN
+    -> SELECT * FROM TEACHERS
+    -> CALL P7('betat1')//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CALL P7('betat1')' at line 4
+mysql> CREATE PROCEDURE P8(OUT Y INT)
+    -> SELECT COUNT(id) INTO Y FROM teachers;
+    -> MCND
+    -> //
+Query OK, 0 rows affected (0.07 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MCND' at line 1
+mysql> CREATE PROCEDURE P8(OUT Y INT)
+    -> BEGIN
+    -> SELECT COUNT(id) INTO Y FROM teachers;
+    -> END//
+ERROR 1304 (42000): PROCEDURE P8 already exists
+mysql> CREATE PROCEDURE P9(OUT Y INT)
+    -> BEGIN
+    -> CREATE PROCEDURE P8(OUT Y INT)
+    -> .,ZMS
+    -> ;
+    -> //
+ERROR 1303 (2F003): Can't create a PROCEDURE from within another stored routine
+mysql> CREATE PROCEDURE P9(OUT Y INT)
+    -> BEGIN
+    -> SELECT COUNT(id) INTO Y FROM teachers;
+    -> END//
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CALL P9(@total)//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select @total
+    -> //
++--------+
+| @total |
++--------+
+|      4 |
++--------+
+1 row in set (0.00 sec)
+
+mysql>

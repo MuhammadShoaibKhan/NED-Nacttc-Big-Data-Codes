@@ -1,0 +1,42 @@
+select colname
+from table1
+inner join tabl2 ON tab1.colname=tab2.colname 
+select t1.colname,t2.colname
+from table1 as t1
+inner join tabl2 ON tab1.colname=tab2.colname 
+
+create table students(id int(11), nm varchar(255),fname varchar(255), grade varchar(4));
+
+ create table teachers(id int(11), nm varchar(255),fname varchar(255),sal float(11));
+
+insert into students(id, nm,fname,grade) VALUES(1,'beta1','abba1','P'),
+    -> (2,'beta2','abba2','F'),
+    -> (3,'beta3','abba3','P'),
+    -> (3,'beta3','abba3','P');
+
+insert into teachers(id, nm,fname,sal) VALUES(1,'betat1','abbat1',50000),
+    -> (5,'betat5','abbat5',70000),
+    -> (6,'betat6','abbat6',25000),
+    -> (3,'betat3','abbat3',30000);
+
+select*
+    -> from students
+    -> INNER JOIN teachers ON students.id=teachers.id;
+
+select*
+    -> from teachers
+    -> INNER JOIN students ON teachers.id=students.id;
+
+select*
+    -> from teachers
+    -> INNER JOIN teachers ON students.id=teachers.id;
+
+select*
+    -> from teachers
+    -> LEFT JOIN students ON teachers.id=students.id;
+select*
+    -> from students
+    -> LEFT JOIN teachers ON teachers.id=students.id;
+ select*
+    -> from students
+    -> RIGHT OUTER JOIN teachers ON teachers.id=students.id;

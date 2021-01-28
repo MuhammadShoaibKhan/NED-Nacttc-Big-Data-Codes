@@ -1,0 +1,494 @@
+mysql> show databses
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| student            |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.04 sec)
+
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| customers         |
+| employees         |
+| orders            |
+| students          |
+| teachers          |
++-------------------+
+5 rows in set (0.10 sec)
+
+mysql> select * from customers;
+Empty set (0.06 sec)
+
+mysql> select * from students;
++------+-------+-------+-------+
+| id   | nm    | fname | grade |
++------+-------+-------+-------+
+|    1 | beta1 | abba1 | P     |
+|    2 | beta2 | abba2 | F     |
+|    3 | beta3 | abba3 | P     |
+|    3 | beta3 | abba3 | P     |
++------+-------+-------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select * from employees;
+Empty set (0.02 sec)
+
+mysql> select * from teachers;
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.02 sec)
+
+mysql> CREATE PROCEDURE display()
+    -> BEGIN
+    -> SELECT * FROM teachers
+    -> END;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> CREATE PROCEDURE display()
+    -> select * from teachers;
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> CREATE PROCEDURE display()
+    -> BEGIN
+    -> select * from teachers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> display()
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'display()' at line 1
+mysql> display;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'display' at line 1
+mysql> exec display();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'exec display()' at line 1
+mysql> exec display()
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'exec display()' at line 1
+mysql> CREATE PROCEDURE display
+    -> BEGIN
+    -> select * from teachers
+    -> END;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BEGIN
+select * from teachers
+END' at line 2
+mysql> call display()
+    -> ;
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call display;
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE PROCEDURE print()
+    -> BEGIN
+    -> SELECT * FROM teachers
+    -> END;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> call print;
+ERROR 1305 (42000): PROCEDURE student.print does not exist
+mysql> CREATE PROCEDURE print()
+    -> BEGIN
+    -> select * from teachers; END;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'END' at line 1
+mysql> CREATE PROCEDURE print()
+    -> BEGIN
+    -> select * from teachers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE print()
+    -> BEGIN
+    -> SELECT * FROM teachers;
+    -> END//
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> CALL print()
+    -> ;
+    -> //
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> \h
+
+For information about MySQL products and services, visit:
+   http://www.mysql.com/
+For developer information, including the MySQL Reference Manual, visit:
+   http://dev.mysql.com/
+To buy MySQL Enterprise support, training, or other products, visit:
+   https://shop.mysql.com/
+
+List of all MySQL commands:
+Note that all text commands must be first on line and end with ';'
+?         (\?) Synonym for `help'.
+clear     (\c) Clear the current input statement.
+connect   (\r) Reconnect to the server. Optional arguments are db and host.
+delimiter (\d) Set statement delimiter.
+ego       (\G) Send command to mysql server, display result vertically.
+exit      (\q) Exit mysql. Same as quit.
+go        (\g) Send command to mysql server.
+help      (\h) Display this help.
+notee     (\t) Don't write into outfile.
+print     (\p) Print current command.
+prompt    (\R) Change your mysql prompt.
+quit      (\q) Quit mysql.
+rehash    (\#) Rebuild completion hash.
+source    (\.) Execute an SQL script file. Takes a file name as an argument.
+status    (\s) Get status information from the server.
+system    (\!) Execute a system shell command.
+tee       (\T) Set outfile [to_outfile]. Append everything into given outfile.
+use       (\u) Use another database. Takes database name as argument.
+charset   (\C) Switch to another charset. Might be needed for processing binlog with multi-byte charsets.
+warnings  (\W) Show warnings after every statement.
+nowarning (\w) Don't show warnings after every statement.
+resetconnection(\x) Clean session context.
+
+For server side help, type 'help contents'
+
+mysql> SELECT * FROM teachers;
+    -> //
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM teachers//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> delimiter ;
+mysql> SELECT * FROM teachers;
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE PROCEDURE displaySalary()
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> delimiter //
+mysql> CREATE PROCEDURE displaySalary()
+    -> BEGIN
+    -> SELECT * FROM teachers WHERE sal>40000;
+    -> END//
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> CALL displaySalary()//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
++------+--------+--------+-------+
+2 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE PROCEDURE displayHighSalary()
+    -> BEGIN
+    -> SELECT * FROM teachers WHERE sal>40000;
+    -> END//
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CALL displayHighSalary()//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
++------+--------+--------+-------+
+2 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CALL displayHighSalary()//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
++------+--------+--------+-------+
+2 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DECLARE X INT() DEFAULT 0;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT() DEFAULT 0' at line 1
+mysql> DECLARE X INT(11) DEFAULT 0//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT(11) DEFAULT 0' at line 1
+mysql> DECLARE X INT DEFAULT 0//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT DEFAULT 0' at line 1
+mysql> DECLARE X INT DEFAULT 0;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT DEFAULT 0' at line 1
+mysql> DECLARE X INT//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT' at line 1
+mysql> delimiter ;
+mysql> DECLARE X INT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT' at line 1
+mysql> DECLARE X INT(2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT(2)' at line 1
+mysql> DECLARE X INT DEFAULT 0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT DEFAULT 0' at line 1
+mysql> CREATE PROCEDURE displayHighSalary()
+    -> BEGIN
+    -> SELECT * FROM teachers WHERE sal>40000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> delimiter //
+mysql> CREATE PROCEDURE displayHighSalary()
+    -> BEGIN
+    -> SELECT * FROM teachers WHERE sal>40000;
+    -> DECLARE X INT DEFAULT 0;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT DEFAULT 0;
+END' at line 4
+mysql> CREATE PROCEDURE displayHighSalary()
+    -> BEGIN
+    -> DECLARE X INT DEFAULT 0;
+    -> END//
+ERROR 1304 (42000): PROCEDURE displayHighSalary already exists
+mysql> CREATE PROCEDURE proc1()
+    -> BEGIN
+    -> DECLARE X INT DEFAULT 0;
+    -> SELECT * FROM teachers WHERE sal>40000;
+    -> END//
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> SET X=5//
+ERROR 1193 (HY000): Unknown system variable 'X'
+mysql> CREATE PROCEDURE proc2()
+    -> BEGIN
+    -> SELECT * FROM teachers WHERE sal>40000;
+    -> DECLARE X INT DEFAULT 0;
+    -> SET X=1;
+    -> SELECT * FROM teachers WHERE id=X;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT DEFAULT 0;
+SET X=1;
+SELECT * FROM teachers WHERE id=X;
+END' at line 4
+mysql> CREATE PROCEDURE proc2()
+    -> DECLARE X INT;
+    -> SET X=1;
+    -> SELECT * FROM teachers WHERE id=X;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECLARE X INT;
+SET X=1;
+SELECT * FROM teachers WHERE id=X;
+END' at line 2
+mysql> CREATE PROCEDURE proc2()
+    -> BEGIN
+    -> SELECT * FROM teachers WHERE id=X//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> CREATE PROCEDURE proc2()
+    -> BEGIN
+    -> DECLARE X INT;
+    -> SET X=1;
+    -> END//
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE PROCEDURE proc3()
+    -> BEGIN
+    -> DECLARE X INT;
+    -> SET X=1;
+    -> SELECT * FROM teachers
+    -> WHERE id=X;
+    -> END//
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CALL proc3//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
++------+--------+--------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE PROCEDURE proc4()
+    -> BEGIN
+    -> CREATE PROCEDURE proc4();
+    -> //
+ERROR 1303 (2F003): Can't create a PROCEDURE from within another stored routine
+mysql> CREATE PROCEDURE proc4(IN X INT)
+    -> BEGIN
+    -> SELECT * FROM teachers
+    -> WHERE id=X;
+    -> END//
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CALL proc4(1)//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
++------+--------+--------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL proc4(6)//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    6 | betat6 | abbat6 | 25000 |
++------+--------+--------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE PROCEDURE proc5(IN X INT, IN tname VARCHAR(255))
+    -> BEGIN
+    -> SELECT * FROM teachers
+    -> WHERE id=X, nm=tname;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', nm=tname;
+END' at line 4
+mysql> CREATE PROCEDURE proc5(IN X INT, IN tname VARCHAR(255))
+    -> BEGIN
+    -> SELECT * FROM teachers
+    -> WHERE id=X AND nm=tname;
+    -> END//
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CALL proc5(1, beta1)//
+ERROR 1054 (42S22): Unknown column 'beta1' in 'field list'
+mysql> CALL proc5(1, 'beta1')//
+Empty set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL proc5(1, 'betat1')//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
++------+--------+--------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE PROCEDURE proc6(OUT totalTeachers INT)
+    -> BEGIN
+    -> SELECT COUNT(id) INTO totalTeachers FROM teachers;
+    -> END//
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> CALL proc6//
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE student.proc6; expected 1, got 0
+mysql> CALL proc6(@totalTeach)//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT @totalTeach//
++-------------+
+| @totalTeach |
++-------------+
+|           4 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE PROCEDURE proc7(IN name VARCHAR(255), OUT totalTeachers INT, INOUT salary float)
+    -> BEGIN
+    -> SELECT * FROM teachers
+    -> WHERE nm=name;
+    -> UPDATE teachers
+    -> SET sal=salary
+    -> WHERE nm=name;
+    -> SELECT COUNT(id) INTO totalTeachers FROM teachers;
+    -> END//
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CALL proc7('betat3',@tol,70000)
+    -> //
+ERROR 1414 (42000): OUT or INOUT argument 3 for routine student.proc7 is not a variable or NEW pseudo-variable in BEFORE trigger
+mysql> @salary=70000
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@salary=70000' at line 1
+mysql> SET @salary=70000
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL proc7('betat3',@tol,@salary)
+    -> //
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    3 | betat3 | abbat3 | 30000 |
++------+--------+--------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from teachers//
++------+--------+--------+-------+
+| id   | nm     | fname  | sal   |
++------+--------+--------+-------+
+|    1 | betat1 | abbat1 | 50000 |
+|    5 | betat5 | abbat5 | 70000 |
+|    6 | betat6 | abbat6 | 25000 |
+|    3 | betat3 | abbat3 | 70000 |
++------+--------+--------+-------+
+4 rows in set (0.00 sec)

@@ -1,0 +1,31 @@
+CountyCode	Country
+AFG	Afghanistan
+ARG	Argentina
+AUS	Australia
+AUT	Austria
+BGR	Bulgaria
+BRA	Brazil
+CAN	Canada
+DEU	Germany
+DNK	Denmark
+FRA	France
+GBR	United Kingdom
+HRV	Croatia
+IND	India
+IRL	Ireland
+ISR	Israel
+ITA	Italy
+JPN	Japan
+NLD	Netherlands
+NPL	Nepal
+NZL	New Zealand
+PAK	Pakistan
+PER	Peru
+PRT	Portugal
+QAT	Qatar
+RUS	Russia
+SGP	Singapore
+SWE	Sweden
+UAE	United Arab Emirates
+USA	United States
+ZAF	South Africa
